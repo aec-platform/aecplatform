@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>roomgraph — AEC Platform</title>
+<meta name="description" content="A vector floor-plan PDF goes in. Rooms, areas, doors, windows and an adjacency graph come out.">
+<meta property="og:title" content="roomgraph — AEC Platform">
+<meta property="og:description" content="A vector floor-plan PDF goes in. Rooms, areas, doors, windows and an adjacency graph come out.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aecplatform.vn">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="vi" href="https://aecplatform.vn/vi/products/roomgraph.html">
+<link rel="alternate" hreflang="en" href="https://aecplatform.vn/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D4E89'/%3E%3Cpath d='M8 23L16 9l8 14' stroke='%23fff' stroke-width='2.5' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#FBFAF7; --surface:#FFFFFF; --ink:#14161A; --muted:#5A6069;
+  --line:#E5E3DC; --accent:#1D4E89; --mark:#B4682A; --band:#F4F2EC;
+  --radius:10px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E1116; --surface:#161A21; --ink:#E8EAED; --muted:#98A1AD;
+    --line:#262C35; --accent:#7FAEE0; --mark:#DCA164; --band:#12161C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1116; --surface:#161A21; --ink:#E8EAED; --muted:#98A1AD;
+  --line:#262C35; --accent:#7FAEE0; --mark:#DCA164; --band:#12161C;
+}
+:root[data-theme="light"]{
+  --bg:#FBFAF7; --surface:#FFFFFF; --ink:#14161A; --muted:#5A6069;
+  --line:#E5E3DC; --accent:#1D4E89; --mark:#B4682A; --band:#F4F2EC;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;
+  font-feature-settings:"kern" 1;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+h1,h2,h3{letter-spacing:-.02em; line-height:1.2; margin:0 0 .5em}
+h1{font-size:clamp(30px,5vw,46px); font-weight:660}
+h2{font-size:clamp(22px,3vw,30px); font-weight:640; margin-bottom:.35em}
+h3{font-size:17px; font-weight:640; margin-top:2rem}
+p{margin:0 0 1rem}
+.lead{color:var(--muted); font-size:clamp(16px,2vw,19px); max-width:62ch}
+.small{font-size:14px}
+.muted{color:var(--muted)}
+
+/* header */
+.top{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.top-inner{display:flex; align-items:center; gap:20px; height:60px}
+.brand{display:flex; align-items:center; gap:9px; color:var(--ink); font-weight:640;
+  letter-spacing:-.01em; text-decoration:none}
+.brand svg{color:var(--accent)}
+.nav{display:flex; gap:20px; margin-left:auto; font-size:14.5px}
+.nav a{color:var(--muted)}
+.nav a:hover{color:var(--ink); text-decoration:none}
+.lang{font-size:13px; color:var(--muted); border:1px solid var(--line);
+  padding:4px 10px; border-radius:99px; white-space:nowrap}
+.lang:hover{color:var(--ink); border-color:var(--accent); text-decoration:none}
+@media (max-width:720px){ .nav{display:none} }
+
+/* hero */
+.hero{position:relative; padding:88px 0 64px; border-bottom:1px solid var(--line);
+  overflow:hidden}
+/* The drafting grid is decoration only, so it lives on its own layer — masking
+   the section itself would fade the headline with it. */
+.hero::before{content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:52px 52px; background-position:center;
+  -webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 0%,#000 10%,transparent 72%);
+          mask-image:radial-gradient(ellipse 80% 75% at 50% 0%,#000 10%,transparent 72%);
+}
+.hero .wrap{position:relative}
+.hero h1{max-width:19ch}
+.hero .lead{margin-top:18px}
+.cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px}
+.btn{display:inline-block; padding:10px 18px; border-radius:8px; border:1px solid var(--line);
+  background:var(--surface); color:var(--ink); font-size:14.5px; font-weight:560}
+.btn:hover{border-color:var(--accent); text-decoration:none}
+/* --bg tracks the theme, so the label stays legible on the light-blue dark-mode
+   accent as well as the deep-blue light-mode one. */
+.btn-primary{background:var(--accent); border-color:var(--accent); color:var(--bg)}
+.btn-primary:hover{filter:brightness(1.08)}
+
+/* numbers */
+.numbers{border-bottom:1px solid var(--line); background:var(--band)}
+.numbers-inner{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:24px; padding-top:28px; padding-bottom:28px}
+.num{display:block; font-size:30px; font-weight:660; letter-spacing:-.03em; color:var(--mark)}
+.num-label{display:block; font-size:13.5px; color:var(--muted); margin-top:2px}
+
+/* sections */
+.section{padding:64px 0; border-bottom:1px solid var(--line)}
+.band{background:var(--band)}
+.prose{max-width:66ch; margin-top:18px}
+.prose p{margin-bottom:1.15rem}
+
+/* cards */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
+  gap:14px; margin-top:26px}
+.card{display:block; padding:20px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--surface); color:var(--ink); transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent); text-decoration:none; transform:translateY(-2px)}
+.card h3{margin:0 0 8px; font-size:17px}
+.card p{margin:0; font-size:14.5px; color:var(--muted); line-height:1.55}
+.card .meta{margin-top:12px; font-size:12.5px; color:var(--muted); opacity:.85}
+.pill-private{display:inline-block; width:6px; height:6px; border-radius:99px;
+  background:var(--mark); margin-left:7px; vertical-align:middle; overflow:hidden;
+  text-indent:-99px}
+
+/* stack diagram */
+.stack-wrap{margin-top:28px; overflow-x:auto; border:1px solid var(--line);
+  border-radius:var(--radius); background:var(--surface); padding:14px}
+.stack{display:block; min-width:640px; width:100%; height:auto; color:var(--muted)}
+.stack-box{fill:var(--band); stroke:var(--line)}
+.stack-box.is-private{stroke-dasharray:4 3}
+.stack a:hover .stack-box{stroke:var(--accent)}
+.stack-label{fill:var(--ink); font-size:13px; font-weight:560;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.stack-tier{fill:var(--muted); font-size:10.5px; letter-spacing:.14em; opacity:.75}
+.stack-edge{stroke:var(--mark); stroke-width:1.4; fill:none; opacity:.75}
+
+/* product page */
+.crumb{font-size:14px}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:14px; margin:26px 0 0; padding:18px 20px; border:1px solid var(--line);
+  border-radius:var(--radius); background:var(--surface)}
+.facts dt{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+.facts dd{margin:3px 0 0; font-weight:560; font-size:15px}
+pre{margin:10px 0 0; padding:14px 16px; overflow-x:auto; border:1px solid var(--line);
+  border-radius:var(--radius); background:var(--surface)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px}
+.ticks{margin:14px 0 0; padding:0; list-style:none; max-width:70ch}
+.ticks li{position:relative; padding-left:24px; margin-bottom:11px; color:var(--muted)}
+.ticks li::before{content:""; position:absolute; left:4px; top:.62em; width:7px; height:7px;
+  border-radius:2px; background:var(--mark)}
+.related{margin-top:26px; font-size:14.5px}
+.related span{color:var(--muted); margin-right:6px}
+.source{margin-top:32px}
+
+/* footer */
+.foot{padding:36px 0; background:var(--band)}
+.foot-inner{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between}
+.foot p{margin:4px 0 0}
+.foot-links{display:flex; flex-direction:column; gap:5px; font-size:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="currentColor" opacity=".12"/><path d="M8 23L16 9l8 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>
+      <span>AEC Platform</span>
+    </a>
+    <nav class="nav"><a href="/#products">Products</a><a href="/#open">Open source</a><a href="/#why">Why</a><a href="/#contact">Contact</a></nav>
+    <a class="lang" href="/vi/products/roomgraph.html" hreflang="vi">Tiếng Việt</a>
+  </div>
+</header>
+
+<article class="section product">
+  <div class="wrap">
+    <p class="crumb"><a href="/">← All products</a></p>
+    <h1>roomgraph</h1>
+    <p class="lead">A vector floor-plan PDF goes in. Rooms, areas, doors, windows and an adjacency graph come out.</p>
+    <dl class="facts"><div><dt>Status</dt><dd>Alpha</dd></div><div><dt>License</dt><dd>MIT</dd></div><div><dt>Language</dt><dd>Python</dd></div><div><dt>Tests</dt><dd>135</dd></div></dl>
+    <h3>Install</h3><pre><code>pip install git+https://github.com/aec-platform/roomgraph.git</code></pre><p class="muted small">Not on PyPI yet — this installs from source.</p><h3>Run</h3><pre><code>roomgraph extract plan.pdf -o out/</code></pre>
+    <div class="prose"><p>Most plans that reach a reviewer are PDFs, not models, and the geometry is right there in the file — it just has no rooms in it. roomgraph reconstructs them: closed regions, areas, openings, and the graph of what connects to what, as JSON, GeoJSON and a rough IFC. The PDF reader, the geometry, the IFC writer and even the animated GIF in its README are all in the package, in the standard library.</p></div>
+    <h3>What makes it different</h3>
+    <ul class="ticks"><li>Room reconstruction from vector geometry — no OCR, no raster tracing, no model required</li><li>JSON, GeoJSON and a rough IFC from one extraction</li><li>Zero dependencies, down to the GIF encoder</li></ul>
+    
+    <p class="source"><a class="btn btn-primary" href="https://github.com/aec-platform/roomgraph">Source →</a></p>
+  </div>
+</article>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div>
+      <strong>AEC Platform</strong>
+      <p class="muted small">Hà Nội, Việt Nam · Open tools under MIT. Products under their own licences.</p>
+    </div>
+    <div class="foot-links">
+      <a href="mailto:sophie.nguyenthuthuy@gmail.com">sophie.nguyenthuthuy@gmail.com</a>
+      <a href="https://github.com/aec-platform">github.com/aec-platform</a>
+      <a href="/vi/products/roomgraph.html">Tiếng Việt</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,811 @@
+{
+  "$schema": "./schema.json",
+  "org": {
+    "name": "AEC Platform",
+    "domain": "aecplatform.vn",
+    "github": "aec-platform",
+    "founded": "2026",
+    "base": "Hà Nội, Việt Nam",
+    "contact": "sophie.nguyenthuthuy@gmail.com",
+    "tagline": {
+      "en": "An open toolchain for the built environment — and the construction software Vietnam actually runs on.",
+      "vi": "Bộ công cụ mở cho ngành xây dựng — và phần mềm quản lý dự án mà nhà thầu Việt Nam thực sự dùng được."
+    },
+    "thesis": {
+      "en": [
+        "Construction software is closed at exactly the layer that should be open. The file formats are ISO standards, the building codes are public law, and the carbon factors are published research — yet reading an IFC file, checking a plan against a code, or pricing a model's embodied carbon still means a paid seat in someone's suite, and an answer you cannot audit.",
+        "So we build in two layers. Underneath: a small, dependency-free open toolchain that reads models, checks drawings, prices carbon and answers questions with a citation back to the source line. On top: commercial products that carry Vietnamese regulation — NĐ 06/2021, QCVN 06:2022, NĐ 123/2020, Luật Đấu thầu 2023 — as data, not as a consultant's slide deck.",
+        "The open layer is not marketing for the closed one. It is the part we think should never have been closed."
+      ],
+      "vi": [
+        "Phần mềm xây dựng đang đóng đúng ở tầng lẽ ra phải mở. Định dạng file là tiêu chuẩn ISO, quy chuẩn xây dựng là văn bản pháp luật công khai, hệ số phát thải là nghiên cứu đã công bố — vậy mà để đọc một file IFC, để soát một mặt bằng theo quy chuẩn, hay để tính carbon hàm chứa của một mô hình, bạn vẫn phải mua một chỗ ngồi trong bộ phần mềm của người khác, và nhận về một con số không kiểm chứng được.",
+        "Nên chúng tôi làm hai tầng. Tầng dưới: bộ công cụ mở, không phụ thuộc thư viện ngoài, đọc mô hình, soát bản vẽ, tính carbon và trả lời câu hỏi kèm trích dẫn ngược về đúng dòng dữ liệu gốc. Tầng trên: sản phẩm thương mại mang quy định Việt Nam — NĐ 06/2021, QCVN 06:2022, NĐ 123/2020, Luật Đấu thầu 2023 — vào dưới dạng dữ liệu, không phải dưới dạng slide tư vấn.",
+        "Tầng mở không phải chiêu marketing cho tầng đóng. Đó là phần chúng tôi cho rằng lẽ ra không bao giờ nên đóng."
+      ]
+    }
+  },
+  "lines": [
+    {
+      "id": "products",
+      "name": {
+        "en": "Products",
+        "vi": "Sản phẩm"
+      },
+      "blurb": {
+        "en": "Commercial software for firms building in Vietnam. Regulation encoded as data, priced in VNĐ, in Vietnamese.",
+        "vi": "Phần mềm thương mại cho đơn vị thi công và tư vấn tại Việt Nam. Quy định mã hoá thành dữ liệu, tính bằng VNĐ, giao diện tiếng Việt."
+      }
+    },
+    {
+      "id": "open",
+      "name": {
+        "en": "Open tools",
+        "vi": "Công cụ mở"
+      },
+      "blurb": {
+        "en": "Open-source software you run yourself. Install it, point it at your own files, read the source. No account, no upload, no seat.",
+        "vi": "Phần mềm mã nguồn mở bạn tự vận hành. Cài về, trỏ vào file của mình, đọc được mã nguồn. Không tài khoản, không upload, không mua chỗ ngồi."
+      }
+    },
+    {
+      "id": "foundation",
+      "name": {
+        "en": "Foundations",
+        "vi": "Nền tảng"
+      },
+      "blurb": {
+        "en": "The layer everything else stands on: a standard-library IFC reader, and the conformance suite that keeps every reader honest.",
+        "vi": "Tầng mà mọi thứ khác đứng lên: bộ đọc IFC chỉ dùng thư viện chuẩn, và bộ kiểm định sự tuân thủ giữ cho mọi bộ đọc trung thực."
+      }
+    },
+    {
+      "id": "research",
+      "name": {
+        "en": "Research",
+        "vi": "Nghiên cứu"
+      },
+      "blurb": {
+        "en": "Open, citable datasets. Published because the field needs them to exist, not because they sell anything.",
+        "vi": "Bộ dữ liệu mở, trích dẫn được. Công bố vì ngành cần chúng tồn tại, không phải vì chúng bán được gì."
+      }
+    }
+  ],
+  "products": [
+    {
+      "slug": "suite",
+      "name": "AEC Suite",
+      "repo_dir": "aec-platform",
+      "line": "products",
+      "status": "private-beta",
+      "license": "AGPL-3.0",
+      "language": "Python · TypeScript",
+      "public": false,
+      "repo": "https://github.com/aec-platform/aec-suite",
+      "tagline": {
+        "en": "Sixteen modules covering a Vietnamese construction project end to end — bid to handover.",
+        "vi": "Mười sáu phân hệ phủ trọn vòng đời một dự án xây dựng Việt Nam — từ đấu thầu tới bàn giao."
+      },
+      "description": {
+        "en": "The flagship. BidRadar watches VN procurement portals and filters RFPs against what your firm can actually win. CostPulse turns a BoQ into a priced estimate and an RFQ to verified suppliers. SiteEye reads daily site photos into progress percentages and safety flags. NghiệmThu runs statutory acceptance per NĐ 06/2021 with the CĐT–TVGS–NT signoff matrix. PCCC carries QCVN 06:2022 and the PC07 round-trip. ThanhToán computes VAT, 5% retention and 1% provisional TNDN on every progress claim. The regulation is in the schema, not in a PDF someone forgot to reread.",
+        "vi": "Sản phẩm chủ lực. BidRadar theo dõi cổng đấu thầu quốc gia và lọc hồ sơ mời thầu theo đúng năng lực nhà thầu. CostPulse biến bảng khối lượng thành dự toán có giá và gửi RFQ tới nhà cung cấp đã xác minh. SiteEye đọc ảnh công trường hằng ngày thành phần trăm tiến độ và cảnh báo an toàn. NghiệmThu chạy nghiệm thu theo NĐ 06/2021 với ma trận ký CĐT–TVGS–Nhà thầu. PCCC mang QCVN 06:2022 và vòng PC07 thiết kế–nghiệm thu. ThanhToán tự tính VAT, giữ lại 5% và tạm thu 1% TNDN trên từng đợt thanh toán. Quy định nằm trong schema, không nằm trong một file PDF không ai đọc lại."
+      },
+      "highlights": {
+        "en": [
+          "16 modules: BidRadar · WinWork · CostPulse · SiteEye · CodeGuard · ProjectPulse · Drawbridge · Handover · PermitFlow · NghiệmThu · ThanhToán · PCCC · InvoiceVN · LotusEdge · BondLine · WorkforceVN",
+          "Legal spine: NĐ 06/2021 · QCVN 06:2022/BXD · NĐ 136/2020 · NĐ 123/2020 + TT 78/2021 · Luật Đấu thầu 2023 + NĐ 24/2024 · NĐ 44/2016 · NĐ 152/2020",
+          "FastAPI + async SQLAlchemy 2.0, Next.js 14 App Router, pgvector hybrid retrieval over QCVN and drawing text"
+        ],
+        "vi": [
+          "16 phân hệ: BidRadar · WinWork · CostPulse · SiteEye · CodeGuard · ProjectPulse · Drawbridge · Handover · PermitFlow · NghiệmThu · ThanhToán · PCCC · InvoiceVN · LotusEdge · BondLine · WorkforceVN",
+          "Nền pháp lý: NĐ 06/2021 · QCVN 06:2022/BXD · NĐ 136/2020 · NĐ 123/2020 + TT 78/2021 · Luật Đấu thầu 2023 + NĐ 24/2024 · NĐ 44/2016 · NĐ 152/2020",
+          "FastAPI + async SQLAlchemy 2.0, Next.js 14 App Router, truy hồi lai pgvector trên QCVN và nội dung bản vẽ"
+        ]
+      },
+      "topics": [
+        "saas",
+        "vietnam",
+        "compliance",
+        "cost",
+        "site"
+      ]
+    },
+    {
+      "slug": "atlas",
+      "name": "Atlas",
+      "repo_dir": "atlas-aec",
+      "line": "products",
+      "status": "private-beta",
+      "license": "Proprietary",
+      "language": "TypeScript",
+      "public": false,
+      "repo": "https://github.com/aec-platform/atlas",
+      "tagline": {
+        "en": "The Atlassian workspace, rebuilt around RFIs, submittals and NCRs instead of tickets.",
+        "vi": "Bộ công cụ kiểu Atlassian, dựng lại quanh RFI, Submittal và NCR thay vì ticket phần mềm."
+      },
+      "description": {
+        "en": "Procore costs a 50-seat Vietnamese firm around 120 triệu a month and speaks English. Excel plus Zalo costs nothing and fails every audit. Atlas is the middle: the Jira/Confluence shape every PM already knows, with AEC primitives underneath — RFI, Submittal, NCR, Punch, Change Order, Daily Log, BBNT — and a BIM viewer in the same window as the issue that references it.",
+        "vi": "Procore tính khoảng 120 triệu/tháng cho một công ty 50 người và chỉ nói tiếng Anh. Excel cộng Zalo tốn 0đ và trượt mọi cuộc kiểm toán. Atlas nằm giữa: đúng hình dáng Jira/Confluence mà mọi PM đã quen, nhưng bên dưới là các đối tượng ngành xây dựng — RFI, Submittal, NCR, Punch, Change Order, Nhật ký công trường, BBNT — và trình xem BIM ngay trong cửa sổ chứa vấn đề đang bàn."
+      },
+      "highlights": {
+        "en": [
+          "Jira → Site · Confluence → Specs · Bitbucket → Models, with Forge Viewer inline",
+          "Grounded in NĐ 06/2021 and VBHN 06/VBHN-BXD out of the box, not as a configuration exercise",
+          "Any AI feature runs on open, self-hostable models — your project data does not leave your infrastructure"
+        ],
+        "vi": [
+          "Jira → Site · Confluence → Specs · Bitbucket → Models, kèm Forge Viewer nhúng thẳng",
+          "Bám NĐ 06/2021 và VBHN 06/VBHN-BXD ngay từ đầu, không phải đi cấu hình lại",
+          "Mọi tính năng AI chạy trên mô hình mã nguồn mở tự vận hành — dữ liệu dự án không rời hạ tầng của bạn"
+        ]
+      },
+      "topics": [
+        "saas",
+        "vietnam",
+        "pm",
+        "bim"
+      ]
+    },
+    {
+      "slug": "studio",
+      "name": "Studio",
+      "repo_dir": "phongthuy-floorplan-ai",
+      "line": "products",
+      "status": "beta",
+      "license": "Proprietary",
+      "language": "Python · TypeScript",
+      "public": true,
+      "repo": "https://github.com/aec-platform/studio",
+      "tagline": {
+        "en": "Floor plan analysis and generation, read through a Vietnamese phong thủy ontology.",
+        "vi": "Phân tích và sinh mặt bằng, đọc qua hệ tri thức phong thủy Việt Nam."
+      },
+      "description": {
+        "en": "Western floor-plan datasets do not contain nhà ống, nhà phố, giếng trời or a bàn thờ, so models trained on them mislabel most of what gets built in Vietnam. Studio starts from a curated Vietnamese corpus, keeps the phong thủy rules as versioned queryable data rather than model output, and turns a Bát Trạch reading into something shareable — an annotated SVG plan and a 1200×630 card that travels on Facebook.",
+        "vi": "Các bộ dữ liệu mặt bằng phương Tây không có nhà ống, nhà phố, giếng trời hay bàn thờ, nên mô hình huấn luyện trên đó gán nhãn sai phần lớn công trình đang được xây ở Việt Nam. Studio bắt đầu từ một kho dữ liệu Việt Nam được tuyển chọn, giữ luật phong thủy dưới dạng dữ liệu có phiên bản và truy vấn được thay vì để mô hình tự nghĩ ra, rồi biến một quẻ Bát Trạch thành thứ chia sẻ được — mặt bằng SVG có chú giải và thẻ 1200×630 chạy tốt trên Facebook."
+      },
+      "highlights": {
+        "en": [
+          "Vietnamese typology corpus: apartment, nhà ống, nhà phố — labelled with ban thờ, giếng trời, sân sau",
+          "Bát Trạch, cung mệnh, ngũ hành and placement rules as expert-validated YAML, versioned and diffable",
+          "Stateless SVG share cards — every generated layout has a URL"
+        ],
+        "vi": [
+          "Kho dữ liệu theo loại hình Việt Nam: chung cư, nhà ống, nhà phố — gán nhãn ban thờ, giếng trời, sân sau",
+          "Bát Trạch, cung mệnh, ngũ hành và luật bố trí phòng dưới dạng YAML được chuyên gia thẩm định, có phiên bản, so sánh được",
+          "Thẻ chia sẻ SVG không trạng thái — mỗi phương án sinh ra đều có một URL"
+        ]
+      },
+      "topics": [
+        "ai",
+        "vietnam",
+        "floorplan",
+        "phong-thuy"
+      ]
+    },
+    {
+      "slug": "qto",
+      "name": "qto",
+      "repo_dir": "qto",
+      "line": "open",
+      "status": "beta",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/qto",
+      "package": {
+        "registry": "pypi",
+        "name": "qto-takeoff",
+        "published": false
+      },
+      "command": "qto model.ifc --classification uniformat",
+      "tests": 122,
+      "tagline": {
+        "en": "Quantity takeoff from an IFC model, mapped to whichever cost-code standard you answer to.",
+        "vi": "Bóc tách khối lượng từ mô hình IFC, ánh xạ sang đúng hệ mã chi phí bạn phải báo cáo."
+      },
+      "description": {
+        "en": "Point it at an IFC file, name a classification, get a CSV of quantities per element. The engine is generic and boring on purpose; the contribution is the mappings — UniFormat, MasterFormat, NRM, OmniClass and định mức, each a plain TOML file anyone can read, fork and argue with. Golden bill-of-quantities tests keep a mapping change from silently repricing a building.",
+        "vi": "Trỏ vào một file IFC, chọn hệ phân loại, nhận về CSV khối lượng theo từng cấu kiện. Phần lõi cố tình viết đơn giản và nhàm chán; giá trị nằm ở các bảng ánh xạ — UniFormat, MasterFormat, NRM, OmniClass và định mức — mỗi bảng là một file TOML ai cũng đọc được, fork được và tranh luận được. Bộ test đối chiếu bảng khối lượng chuẩn ngăn một thay đổi ánh xạ âm thầm định giá lại cả công trình."
+      },
+      "highlights": {
+        "en": [
+          "Cost-code standards are pluggable TOML, not hard-coded branches",
+          "Vietnamese định mức alongside UniFormat, MasterFormat, NRM and OmniClass",
+          "Golden-BoQ regression tests on every mapping change"
+        ],
+        "vi": [
+          "Hệ mã chi phí là TOML cắm thêm được, không phải nhánh if hard-code",
+          "Định mức Việt Nam đứng ngang hàng UniFormat, MasterFormat, NRM và OmniClass",
+          "Test đối chiếu bảng khối lượng chuẩn cho mọi thay đổi ánh xạ"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "cost",
+        "cli"
+      ],
+      "depends_on": [
+        "ifc-spf"
+      ]
+    },
+    {
+      "slug": "ifcdiff",
+      "name": "ifcdiff",
+      "repo_dir": "ifcdiff",
+      "line": "open",
+      "status": "beta",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/ifcdiff",
+      "package": {
+        "registry": "pypi",
+        "name": "ifcdiff-cli",
+        "published": false
+      },
+      "command": "ifcdiff rev-a.ifc rev-b.ifc --format markdown",
+      "tests": 157,
+      "tagline": {
+        "en": "Two model revisions in, a changelog a human will actually read out.",
+        "vi": "Đưa vào hai phiên bản mô hình, nhận về bản ghi thay đổi mà người ta thật sự chịu đọc."
+      },
+      "description": {
+        "en": "Which walls moved and by how much. Which properties changed. Quantity deltas by class — and, the part that matters in a payment meeting, what caused them. Markdown for a pull request, HTML for a CI artifact, JSON for a script, BCF 2.1 for the coordination tool everyone already has open.",
+        "vi": "Tường nào đã dịch chuyển và dịch bao nhiêu. Thuộc tính nào đã đổi. Chênh lệch khối lượng theo nhóm cấu kiện — và, phần quan trọng nhất trong một buổi họp thanh toán, nguyên nhân gây ra chênh lệch đó. Xuất Markdown cho pull request, HTML cho CI, JSON cho script, BCF 2.1 cho phần mềm phối hợp mà ai cũng đang mở sẵn."
+      },
+      "highlights": {
+        "en": [
+          "Quantity deltas decomposed by cause, not just reported as a number",
+          "Four outputs from one run: Markdown, HTML, JSON, BCF 2.1",
+          "Standard library only — no geometry kernel, no server, nothing to install but the package"
+        ],
+        "vi": [
+          "Chênh lệch khối lượng được phân rã theo nguyên nhân, không chỉ báo ra một con số",
+          "Một lần chạy, bốn định dạng: Markdown, HTML, JSON, BCF 2.1",
+          "Chỉ dùng thư viện chuẩn — không kernel hình học, không server, không phải cài gì thêm"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "diff",
+        "ci",
+        "cli"
+      ]
+    },
+    {
+      "slug": "plancheck",
+      "name": "plancheck",
+      "repo_dir": "plancheck",
+      "line": "open",
+      "status": "beta",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/plancheck",
+      "package": {
+        "registry": "pypi",
+        "name": "plancheck",
+        "published": false
+      },
+      "command": "plancheck check my-building.ifc --jurisdiction TCVN",
+      "tests": 223,
+      "tagline": {
+        "en": "Building code as machine-readable rules, with a fixture for every rule.",
+        "vi": "Quy chuẩn xây dựng viết thành luật máy đọc được, mỗi luật kèm một bộ mẫu kiểm chứng."
+      },
+      "description": {
+        "en": "A small DSL for testable code requirements — egress widths and dead ends, stair riser-tread ratios and landings, fire resistance and compartment area, separation distance, setbacks, parking, daylight — with fixtures proving each rule fires when it should and stays quiet when it should not. TCVN, IBC and EN jurisdictions ship in the box; the Vietnamese set encodes QCVN 06:2022/BXD fire safety, QCVN 04:2021/BXD apartment buildings and QCVN 01:2021/BXD planning. Rules export two ways to buildingSMART IDS, with an honest report of what could not be expressed rather than a silent downgrade.",
+        "vi": "Một DSL nhỏ cho các yêu cầu quy chuẩn kiểm chứng được — bề rộng thoát nạn và hành lang cụt, tỷ lệ bậc thang và chiếu nghỉ, giới hạn chịu lửa và diện tích khoang cháy, khoảng cách phòng cháy, khoảng lùi, hệ số đỗ xe, chiếu sáng tự nhiên — kèm bộ mẫu chứng minh mỗi luật báo lỗi đúng lúc và im lặng đúng lúc. Có sẵn TCVN, IBC và EN; bộ luật Việt Nam mã hoá QCVN 06:2022/BXD về an toàn cháy, QCVN 04:2021/BXD về nhà chung cư và QCVN 01:2021/BXD về quy hoạch. Luật xuất hai chiều sang buildingSMART IDS, kèm báo cáo trung thực về những gì không diễn đạt được thay vì âm thầm bỏ qua."
+      },
+      "highlights": {
+        "en": [
+          "One rule = one TOML file + its fixtures; a contributor adds a code clause without touching the engine",
+          "43 rules over three jurisdictions — 26 of them Vietnamese, covering QCVN 06 fire safety end to end",
+          "Where a clause has two thresholds and the input is missing, the rule takes the strict branch — a blank field never buys the relaxation",
+          "Two-way buildingSMART IDS with an explicit non-exportable report"
+        ],
+        "vi": [
+          "Một luật = một file TOML + bộ mẫu; người đóng góp thêm một điều khoản quy chuẩn mà không cần đụng vào engine",
+          "43 luật trên ba hệ quy chuẩn — 26 luật Việt Nam, phủ trọn an toàn cháy QCVN 06",
+          "Khi một điều khoản có hai ngưỡng mà dữ liệu còn trống, luật lấy nhánh nghiêm hơn — một ô bỏ trống không bao giờ mua được phần nới lỏng",
+          "buildingSMART IDS hai chiều, kèm báo cáo rõ phần không xuất được"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "compliance",
+        "code",
+        "vietnam",
+        "fire-safety",
+        "cli"
+      ],
+      "depends_on": [
+        "ifc-spf"
+      ]
+    },
+    {
+      "slug": "ecfactors",
+      "name": "ecfactors",
+      "repo_dir": "ecfactors",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/ecfactors",
+      "package": {
+        "registry": "pypi",
+        "name": "ecfactors",
+        "published": false
+      },
+      "command": "ecfactors takeoff model.ifc --region VN",
+      "tests": 62,
+      "tagline": {
+        "en": "Embodied carbon factors A1–A3 as a versioned dataset where every row carries its source.",
+        "vi": "Hệ số carbon hàm chứa A1–A3 dưới dạng bộ dữ liệu có phiên bản, mỗi dòng mang theo nguồn gốc của nó."
+      },
+      "description": {
+        "en": "Whole-life carbon is moving from voluntary to mandatory, and the numbers behind most submissions live in paywalled spreadsheets and PDFs with no machine-readable form. This repo takes one position and enforces it in CI: a factor without a traceable EPD source, a date and a region is not data, and does not merge. The seed rows are deliberately flagged unverified until someone does the work of citing them.",
+        "vi": "Kiểm kê carbon vòng đời đang chuyển từ tự nguyện sang bắt buộc, trong khi các con số phía sau phần lớn hồ sơ nộp lại nằm trong bảng tính trả phí và PDF không máy nào đọc được. Kho này giữ đúng một quan điểm và ép nó trong CI: một hệ số không có nguồn EPD truy được, không có ngày và không có vùng áp dụng thì không phải dữ liệu, và không được merge. Các dòng khởi tạo cố tình gắn cờ chưa kiểm chứng cho tới khi có người trích dẫn tử tế."
+      },
+      "highlights": {
+        "en": [
+          "Provenance enforced in CI — no source, no date, no region, no merge",
+          "One material per pull request, so every number has a reviewer",
+          "Ships with a standard-library IFC takeoff that prices a model against the dataset"
+        ],
+        "vi": [
+          "Nguồn gốc được ép trong CI — thiếu nguồn, thiếu ngày, thiếu vùng thì không merge",
+          "Mỗi pull request một vật liệu, để con số nào cũng có người rà",
+          "Kèm công cụ bóc tách IFC chỉ dùng thư viện chuẩn, tính carbon cho mô hình theo bộ dữ liệu"
+        ]
+      },
+      "topics": [
+        "carbon",
+        "dataset",
+        "ifc",
+        "epd"
+      ],
+      "depends_on": [
+        "qto"
+      ]
+    },
+    {
+      "slug": "bimq",
+      "name": "bimq",
+      "repo_dir": "bimq",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/bimq",
+      "package": {
+        "registry": "pypi",
+        "name": "bimq",
+        "published": false
+      },
+      "command": "bimq ask model.ifc \"fire-rated doors on level 3\"",
+      "tests": 223,
+      "tagline": {
+        "en": "A read-only BIM query server for agents, where every row cites the line it came from.",
+        "vi": "Máy chủ truy vấn BIM chỉ-đọc cho agent, mỗi dòng kết quả trích dẫn đúng dòng dữ liệu gốc."
+      },
+      "description": {
+        "en": "Point it at an IFC or gbXML model and it answers structured questions — fire-rated doors on level 3, elements with no material assigned, spaces below the minimum daylight area — bounded by a policy file, deterministic, with a citation back to the GlobalId and source line behind every row. It speaks MCP over stdio for agents, and the same questions run from a CLI so you can check a policy before you trust an agent to it.",
+        "vi": "Trỏ vào một mô hình IFC hoặc gbXML, nó trả lời các câu hỏi có cấu trúc — cửa chống cháy ở tầng 3, cấu kiện chưa gán vật liệu, không gian dưới ngưỡng diện tích chiếu sáng tự nhiên — trong giới hạn một file chính sách, kết quả tất định, và mỗi dòng trích dẫn ngược về GlobalId cùng dòng nguồn. Nó nói MCP qua stdio cho agent, và chạy đúng những câu hỏi đó từ CLI để bạn kiểm tra chính sách trước khi giao cho agent."
+      },
+      "highlights": {
+        "en": [
+          "Read-only by construction — an agent cannot mutate a model through it",
+          "Policy file bounds what may be asked and what may be returned",
+          "Every row carries GlobalId and source line; the CLI and the MCP server answer identically"
+        ],
+        "vi": [
+          "Chỉ-đọc từ trong thiết kế — agent không thể sửa mô hình qua nó",
+          "File chính sách giới hạn câu hỏi được phép hỏi và dữ liệu được phép trả",
+          "Mỗi dòng mang GlobalId và dòng nguồn; CLI và MCP server trả lời như nhau"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "mcp",
+        "agents",
+        "query"
+      ]
+    },
+    {
+      "slug": "roomgraph",
+      "name": "roomgraph",
+      "repo_dir": "roomgraph",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/roomgraph",
+      "package": {
+        "registry": "pypi",
+        "name": "roomgraph",
+        "published": false
+      },
+      "command": "roomgraph extract plan.pdf -o out/",
+      "tests": 135,
+      "tagline": {
+        "en": "A vector floor-plan PDF goes in. Rooms, areas, doors, windows and an adjacency graph come out.",
+        "vi": "Đưa vào một PDF mặt bằng dạng vector. Nhận về phòng, diện tích, cửa đi, cửa sổ và đồ thị liền kề."
+      },
+      "description": {
+        "en": "Most plans that reach a reviewer are PDFs, not models, and the geometry is right there in the file — it just has no rooms in it. roomgraph reconstructs them: closed regions, areas, openings, and the graph of what connects to what, as JSON, GeoJSON and a rough IFC. The PDF reader, the geometry, the IFC writer and even the animated GIF in its README are all in the package, in the standard library.",
+        "vi": "Phần lớn mặt bằng đến tay người thẩm tra là PDF chứ không phải mô hình, và hình học vốn đã nằm sẵn trong file — chỉ là trong đó không có khái niệm phòng. roomgraph dựng lại: vùng khép kín, diện tích, lỗ mở, và đồ thị cái gì thông với cái gì, xuất JSON, GeoJSON và một file IFC thô. Bộ đọc PDF, phần hình học, bộ ghi IFC và cả ảnh GIF động trong README đều nằm trong gói, viết bằng thư viện chuẩn."
+      },
+      "highlights": {
+        "en": [
+          "Room reconstruction from vector geometry — no OCR, no raster tracing, no model required",
+          "JSON, GeoJSON and a rough IFC from one extraction",
+          "Zero dependencies, down to the GIF encoder"
+        ],
+        "vi": [
+          "Dựng lại phòng từ hình học vector — không OCR, không dò ảnh raster, không cần mô hình BIM",
+          "Một lần trích xuất, ba đầu ra: JSON, GeoJSON và IFC thô",
+          "Không phụ thuộc thư viện ngoài, kể cả bộ mã hoá GIF"
+        ]
+      },
+      "topics": [
+        "floorplan",
+        "pdf",
+        "geometry",
+        "ifc"
+      ]
+    },
+    {
+      "slug": "setlint",
+      "name": "setlint",
+      "repo_dir": "setlint",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/setlint",
+      "package": {
+        "registry": "pypi",
+        "name": "setlint",
+        "published": false
+      },
+      "command": "setlint issued-set.pdf",
+      "tests": 73,
+      "tagline": {
+        "en": "Lint an issued PDF drawing set for the mistakes that reach the field.",
+        "vi": "Soát bộ bản vẽ PDF đã phát hành, tìm đúng những lỗi hay lọt ra tới công trường."
+      },
+      "description": {
+        "en": "Point it at the set that goes out the door. It tells you which sheets are referenced but missing, which detail callouts point nowhere, which revision clouds have no revision entry, where the title blocks disagree with each other, which scale bar no longer matches its stated scale, and where the sheet numbers skip. Every architect and every engineer has been burned by exactly these. No CAD, no cloud, and the PDF never leaves your machine.",
+        "vi": "Trỏ vào đúng bộ hồ sơ sắp phát hành. Nó chỉ ra tờ nào được viện dẫn nhưng thiếu, ký hiệu chi tiết nào trỏ vào hư không, đám mây sửa đổi nào không có dòng revision tương ứng, khung tên chỗ nào mâu thuẫn nhau, thước tỷ lệ nào không còn khớp tỷ lệ ghi trên đó, và số hiệu bản vẽ nhảy cóc ở đâu. Kiến trúc sư nào, kỹ sư nào cũng từng dính đúng những lỗi này. Không cần CAD, không cần cloud, và file PDF không rời khỏi máy bạn."
+      },
+      "highlights": {
+        "en": [
+          "Checks the artefact that is actually issued — the PDF, not the source model",
+          "Missing sheets, dead callouts, orphan revision clouds, title-block conflicts, stale scale bars, numbering gaps",
+          "Runs offline; nothing is uploaded"
+        ],
+        "vi": [
+          "Kiểm đúng thứ được phát hành — file PDF, không phải mô hình nguồn",
+          "Thiếu tờ, ký hiệu chi tiết trỏ hụt, đám mây sửa đổi mồ côi, khung tên mâu thuẫn, thước tỷ lệ lệch, số hiệu nhảy cóc",
+          "Chạy ngoại tuyến; không upload gì cả"
+        ]
+      },
+      "topics": [
+        "drawings",
+        "pdf",
+        "qa",
+        "cli"
+      ]
+    },
+    {
+      "slug": "sitecard",
+      "name": "sitecard",
+      "repo_dir": "sitecard",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/sitecard",
+      "package": {
+        "registry": "pypi",
+        "name": "sitecard",
+        "published": false
+      },
+      "command": "sitecard --lat 21.0278 --lon 105.8342 --name \"Hoàn Kiếm\" -o site.pdf",
+      "tests": 121,
+      "tagline": {
+        "en": "Drop a latitude and longitude. Get a one-page site context report.",
+        "vi": "Đưa vào một cặp toạ độ. Nhận về báo cáo bối cảnh khu đất gọn trong một trang."
+      },
+      "description": {
+        "en": "Terrain and slope, sun path and seasonal shadow ranges, wind rose, flood and zoning overlays, nearest utilities — one A4 sheet, and every number on it carries the source it came from. The analysis a practice does by hand in the first week of a project, done before the kickoff meeting.",
+        "vi": "Địa hình và độ dốc, quỹ đạo mặt trời và dải bóng đổ theo mùa, hoa gió, lớp phủ ngập lụt và quy hoạch, hạ tầng kỹ thuật gần nhất — gọn trong một tờ A4, và mỗi con số đều mang theo nguồn của nó. Đúng phần phân tích mà một văn phòng thiết kế làm thủ công trong tuần đầu tiên của dự án, xong trước cả buổi họp khởi động."
+      },
+      "highlights": {
+        "en": [
+          "Terrain, sun path, wind rose, flood and zoning overlays, utilities — on one page",
+          "Every figure cites its source dataset",
+          "A single command produces a client-presentable PDF"
+        ],
+        "vi": [
+          "Địa hình, quỹ đạo mặt trời, hoa gió, ngập lụt, quy hoạch, hạ tầng — trong một trang",
+          "Mọi số liệu đều dẫn nguồn dữ liệu gốc",
+          "Một lệnh duy nhất ra file PDF đưa được cho chủ đầu tư"
+        ]
+      },
+      "topics": [
+        "site",
+        "gis",
+        "climate",
+        "pdf"
+      ]
+    },
+    {
+      "slug": "tcvn-compliance-copilot",
+      "name": "tcvn-compliance-copilot",
+      "repo_dir": "tcvn-compliance-copilot",
+      "line": "open",
+      "status": "beta",
+      "license": "Apache-2.0",
+      "language": "Python · TypeScript",
+      "public": true,
+      "repo": "https://github.com/aec-platform/tcvn-compliance-copilot",
+      "tagline": {
+        "en": "Reviews a drawing set against Vietnamese standards and returns a structured non-compliance report.",
+        "vi": "Soát bộ bản vẽ theo quy chuẩn Việt Nam và trả về báo cáo không phù hợp có cấu trúc."
+      },
+      "description": {
+        "en": "Retrieval over the corpus of Vietnamese building standards — QCVN 06 fire safety, QCVN 10 accessibility, TCVN 2737 loads and others — pointed at a drawing set, producing findings a reviewer can act on rather than a chat transcript. Where tcvn-rules-engine answers questions that can be written as a rule, this one handles the far larger space that cannot: the clauses that are prose, the requirements that depend on reading a drawing, the checks a human would do with the standard open on the desk.",
+        "vi": "Truy hồi trên kho quy chuẩn xây dựng Việt Nam — QCVN 06 an toàn cháy, QCVN 10 tiếp cận cho người khuyết tật, TCVN 2737 tải trọng và nhiều tiêu chuẩn khác — soi vào một bộ bản vẽ, sinh ra các phát hiện mà người thẩm tra dùng được ngay chứ không phải một đoạn hội thoại. Chỗ tcvn-rules-engine trả lời được những gì viết ra thành luật, sản phẩm này gánh phần lớn hơn nhiều mà không viết thành luật được: các điều khoản dạng văn xuôi, các yêu cầu phải đọc bản vẽ mới kết luận, những việc mà một người sẽ làm với quyển tiêu chuẩn mở sẵn trên bàn."
+      },
+      "highlights": {
+        "en": [
+          "Structured non-compliance reports, not a chat window",
+          "Grounded in QCVN 06 (fire), QCVN 10 (accessibility) and TCVN 2737 (loads), among others",
+          "Self-hosted: FastAPI + pgvector + Next.js, with the corpus ingestion in the repo"
+        ],
+        "vi": [
+          "Báo cáo không phù hợp có cấu trúc, không phải một khung chat",
+          "Bám QCVN 06 (an toàn cháy), QCVN 10 (tiếp cận) và TCVN 2737 (tải trọng), cùng nhiều tiêu chuẩn khác",
+          "Tự vận hành: FastAPI + pgvector + Next.js, kèm quy trình nạp kho tiêu chuẩn ngay trong repo"
+        ]
+      },
+      "topics": [
+        "compliance",
+        "vietnam",
+        "rag",
+        "drawings"
+      ]
+    },
+    {
+      "slug": "bimview",
+      "name": "bimview",
+      "repo_dir": "bimview",
+      "line": "open",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/bimview",
+      "package": {
+        "registry": "pypi",
+        "name": "bimview",
+        "published": false
+      },
+      "command": "bimview office.ifc",
+      "tests": 50,
+      "depends_on": [
+        "ifc-spf"
+      ],
+      "tagline": {
+        "en": "An IFC model goes in. One HTML file comes out, and it is the whole viewer.",
+        "vi": "Đưa vào một mô hình IFC. Nhận về một file HTML duy nhất, và đó là toàn bộ trình xem."
+      },
+      "description": {
+        "en": "No CDN, no three.js, no server, no cloud account, no upload — the geometry layer, the WebGL2 renderer and the Revit compound-file reader are all in the package, in the standard library. Orbit a model, click an element to read its property sets, filter by class or storey, then mail the file to a client or attach it to a pull request. Every representation it cannot tessellate is counted, named and carried into the HTML, so the person receiving the file sees the same gaps you did — a viewer that renders three quarters of a model and says nothing is how a missing shaft becomes a site problem.",
+        "vi": "Không CDN, không three.js, không server, không tài khoản đám mây, không upload — tầng hình học, bộ dựng hình WebGL2 và bộ đọc file Revit đều nằm trong gói, viết bằng thư viện chuẩn. Xoay mô hình, bấm vào một cấu kiện để đọc bộ thuộc tính của nó, lọc theo lớp hoặc theo tầng, rồi gửi thẳng file cho chủ đầu tư hay đính vào một pull request. Mọi biểu diễn không dựng được thành lưới tam giác đều được đếm, gọi tên và mang luôn vào file HTML, để người nhận thấy đúng những chỗ thiếu mà bạn thấy — một trình xem dựng được ba phần tư mô hình rồi im lặng chính là cách một hộp kỹ thuật biến mất trở thành sự cố ngoài công trường."
+      },
+      "highlights": {
+        "en": [
+          "One self-contained HTML file — opens on a site laptop with no network",
+          "Reads .rvt for version, worksharing state and the embedded preview via a real MS-CFB reader, and states plainly that Revit geometry needs an IFC export",
+          "Single draw call for the whole model: normals from screen-space derivatives, colour and visibility in data textures",
+          "Openings render filled and say so, rather than drawing a hole that was never computed"
+        ],
+        "vi": [
+          "Một file HTML tự chứa — mở được trên máy tính ngoài công trường không có mạng",
+          "Đọc .rvt lấy phiên bản, trạng thái chia sẻ công việc và ảnh xem trước nhúng bằng bộ đọc MS-CFB thật, và nói thẳng rằng hình học Revit phải xuất qua IFC",
+          "Toàn mô hình trong một lệnh vẽ: pháp tuyến tính từ đạo hàm màn hình, màu và trạng thái ẩn/hiện nằm trong texture dữ liệu",
+          "Lỗ cửa được dựng đặc và báo rõ điều đó, thay vì vẽ một lỗ chưa từng được tính"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "viewer",
+        "webgl",
+        "revit",
+        "cli"
+      ]
+    },
+    {
+      "slug": "ifc-spf",
+      "name": "ifc-spf",
+      "repo_dir": "ifc-spf",
+      "line": "foundation",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/ifc-spf",
+      "package": {
+        "registry": "pypi",
+        "name": "ifc-spf",
+        "published": false
+      },
+      "command": "python -c \"from ifcspf import Model; print(len(Model.open('b.ifc').of_type('IfcDoor')))\"",
+      "tests": 55,
+      "tagline": {
+        "en": "Read IFC-SPF with the standard library. No geometry kernel, no compiled dependency, no schema download.",
+        "vi": "Đọc IFC-SPF chỉ bằng thư viện chuẩn. Không kernel hình học, không thư viện biên dịch, không tải schema."
+      },
+      "description": {
+        "en": "The layer the open tools stand on. Four parts, each usable alone: a tokeniser and parser for ISO 10303-21; a schema layer that addresses attributes by name and expands subtypes, held as data rather than code; unit resolution to SI; and property sets, quantity sets and the spatial chain. This reads what an IFC file states about itself — which is exactly what takeoffs, code checks, audits and exports actually need, and all they need.",
+        "vi": "Tầng mà toàn bộ công cụ mở đứng lên. Bốn phần, mỗi phần dùng riêng được: bộ tách token và phân tích cú pháp ISO 10303-21; tầng schema cho phép gọi thuộc tính theo tên và mở rộng phân lớp con, lưu dưới dạng dữ liệu chứ không phải mã; giải đơn vị về hệ SI; và bộ thuộc tính, bộ khối lượng cùng chuỗi phân cấp không gian. Nó đọc đúng những gì một file IFC tự khai báo — cũng chính là tất cả những gì việc bóc tách, soát quy chuẩn, kiểm toán và kết xuất thực sự cần."
+      },
+      "highlights": {
+        "en": [
+          "ISO 10303-21 parser in pure Python — installs anywhere, including inside a locked-down CI runner",
+          "Schema as data: attributes by name, subtype expansion, no code generation step",
+          "Units resolved to SI, property and quantity sets flattened along the spatial chain"
+        ],
+        "vi": [
+          "Bộ phân tích ISO 10303-21 thuần Python — cài được ở mọi nơi, kể cả trong CI runner bị khoá chặt",
+          "Schema là dữ liệu: gọi thuộc tính theo tên, mở rộng phân lớp con, không cần bước sinh mã",
+          "Đơn vị quy về SI, bộ thuộc tính và khối lượng làm phẳng theo chuỗi phân cấp không gian"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "parser",
+        "library"
+      ]
+    },
+    {
+      "slug": "ifctrap",
+      "name": "ifctrap",
+      "repo_dir": "ifctrap",
+      "line": "foundation",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python · any",
+      "public": true,
+      "repo": "https://github.com/aec-platform/ifctrap",
+      "package": {
+        "registry": "pypi",
+        "name": "ifctrap",
+        "published": false
+      },
+      "command": "ifctrap run --bridge my-toolkit",
+      "tests": 215,
+      "tagline": {
+        "en": "A conformance trap suite for IFC readers — in any language, behind a sixty-line bridge.",
+        "vi": "Bộ bẫy kiểm định độ tuân thủ cho các bộ đọc IFC — bằng bất kỳ ngôn ngữ nào, qua một cầu nối sáu mươi dòng."
+      },
+      "description": {
+        "en": "IFC's important readers are C++, JavaScript and C#. Requiring a Python binding would quietly exclude most of the field and turn a conformance suite into a Python benchmark, which it is not. So a bridge here is just a program: it takes a file path and a probe, writes one JSON object to stdout, exits zero. Write sixty lines and your toolkit gets scored on every case in the corpus.",
+        "vi": "Những bộ đọc IFC quan trọng nhất viết bằng C++, JavaScript và C#. Bắt buộc phải có binding Python sẽ âm thầm loại phần lớn cộng đồng và biến một bộ kiểm định thành bài benchmark Python, điều nó không phải. Nên ở đây một cầu nối chỉ là một chương trình: nhận đường dẫn file và một phép dò, ghi một đối tượng JSON ra stdout, thoát mã 0. Viết sáu mươi dòng là bộ công cụ của bạn được chấm trên toàn bộ ca kiểm thử."
+      },
+      "highlights": {
+        "en": [
+          "Language-neutral by design: the bridge contract is stdin/stdout and an exit code",
+          "A corpus of trap cases that separate a reader that parses from a reader that is correct",
+          "Results are comparable across toolkits, because every toolkit runs the same probes"
+        ],
+        "vi": [
+          "Trung lập ngôn ngữ ngay từ thiết kế: hợp đồng cầu nối chỉ là stdin/stdout và mã thoát",
+          "Kho ca kiểm thử dạng bẫy, tách bộ đọc chạy được khỏi bộ đọc đúng",
+          "Kết quả so sánh được giữa các bộ công cụ, vì mọi bộ đều chạy cùng một tập phép dò"
+        ]
+      },
+      "topics": [
+        "ifc",
+        "conformance",
+        "benchmark"
+      ]
+    },
+    {
+      "slug": "phong-thuy-corpus",
+      "name": "phong-thuy-corpus",
+      "repo_dir": "phong-thuy-corpus",
+      "line": "research",
+      "status": "stable",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/phong-thuy-corpus",
+      "package": {
+        "registry": "pypi",
+        "name": "phongthuy-corpus",
+        "published": false
+      },
+      "tests": 147,
+      "tagline": {
+        "en": "An open, citable, machine-checkable corpus of Vietnamese phong thủy and building-regulation rules.",
+        "vi": "Kho luật phong thủy dương trạch và quy chuẩn xây dựng Việt Nam: mở, trích dẫn được, kiểm tra được bằng máy."
+      },
+      "description": {
+        "en": "Thirty-five rules across four schools, expressed over floor-plan graphs, with a reference checker, four annotated reference plans, and an inter-school conflict benchmark that measures how much the schools actually disagree. The headline result is that Bát Trạch and Huyền Không conflict on 39.6% of the benchmark — which is the sort of thing a field should know about itself, and could not previously measure.",
+        "vi": "Ba mươi lăm luật thuộc bốn trường phái, biểu diễn trên đồ thị mặt bằng, kèm engine kiểm tra tham chiếu, bốn mặt bằng mẫu có chú giải, và một benchmark đo mức vênh giữa các trường phái. Kết quả đáng chú ý: Bát Trạch và Huyền Không mâu thuẫn nhau trên 39,6% số ca — đúng loại sự thật mà một lĩnh vực nên biết về chính mình, và trước đây chưa đo được."
+      },
+      "highlights": {
+        "en": [
+          "35 rules · 4 schools · 4 annotated reference plans",
+          "39.6% Bát Trạch ↔ Huyền Không conflict rate on the published benchmark",
+          "Rules are data with citations, so a disagreement can be traced to a source rather than argued"
+        ],
+        "vi": [
+          "35 luật · 4 trường phái · 4 mặt bằng tham chiếu có chú giải",
+          "Tỷ lệ mâu thuẫn Bát Trạch ↔ Huyền Không đạt 39,6% trên benchmark đã công bố",
+          "Luật là dữ liệu kèm trích dẫn, nên một bất đồng có thể truy về nguồn thay vì đem ra cãi"
+        ]
+      },
+      "topics": [
+        "dataset",
+        "phong-thuy",
+        "floorplan",
+        "research"
+      ]
+    },
+    {
+      "slug": "qcvn-conflict-map",
+      "name": "qcvn-conflict-map",
+      "repo_dir": "qcvn-conflict-map",
+      "line": "research",
+      "status": "alpha",
+      "license": "MIT",
+      "language": "Python",
+      "public": true,
+      "repo": "https://github.com/aec-platform/qcvn-conflict-map",
+      "package": {
+        "registry": "pypi",
+        "name": "qcvn-conflict-map",
+        "published": false
+      },
+      "command": "qcvnmap check",
+      "tests": 38,
+      "tagline": {
+        "en": "An open, machine-checkable catalogue of where Vietnamese building codes contradict each other.",
+        "vi": "Danh mục mở, kiểm được bằng máy, về những chỗ quy chuẩn xây dựng Việt Nam mâu thuẫn nhau."
+      },
+      "description": {
+        "en": "Two regulations can describe the same physical quantity and not meet. The fire code sets external fire flow from fire-resistance class and building volume; the infrastructure code sizes the urban water network from planning population — and on an infill plot the nearest hydrant cannot deliver what the fire submission demands. Each conflict is one TOML file with both readings, the clauses they come from, what it costs in practice, and a verification flag that stays false until someone cites the clause properly. It is the same method as phong-thuy-corpus, turned on the statutory codes.",
+        "vi": "Hai văn bản có thể cùng nói về một đại lượng vật lý mà không gặp nhau. Quy chuẩn an toàn cháy đặt lưu lượng nước chữa cháy ngoài nhà theo bậc chịu lửa và khối tích công trình; quy chuẩn hạ tầng kỹ thuật lại định cỡ mạng cấp nước theo chỉ tiêu quy hoạch dân số — và trên một lô đất xen cấy, trụ nước gần nhất không thể cấp mức mà hồ sơ thẩm duyệt đòi. Mỗi xung đột là một file TOML ghi cả hai cách đọc, điều khoản xuất phát, cái giá phải trả trên thực tế, và một cờ xác minh giữ nguyên giá trị sai cho tới khi có người trích dẫn tử tế. Cùng phương pháp với phong-thuy-corpus, đem áp lên văn bản quy phạm."
+      },
+      "highlights": {
+        "en": [
+          "One conflict per TOML file, bilingual, with the clauses on both sides and the practical cost",
+          "Every reference carries a verified flag that starts false — an uncited conflict is a claim, not a finding",
+          "Sits under tcvn-rules-engine and plancheck: the contradictions a rule engine cannot resolve on its own"
+        ],
+        "vi": [
+          "Mỗi xung đột một file TOML, song ngữ, kèm điều khoản của cả hai phía và chi phí thực tế phát sinh",
+          "Mọi tham chiếu mang cờ đã xác minh, khởi tạo là sai — một xung đột chưa trích dẫn mới là khẳng định, chưa phải phát hiện",
+          "Nằm dưới tcvn-rules-engine và plancheck: đúng những mâu thuẫn mà một engine luật không tự gỡ được"
+        ]
+      },
+      "topics": [
+        "dataset",
+        "vietnam",
+        "compliance",
+        "research"
+      ]
+    }
+  ]
+}

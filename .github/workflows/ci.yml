@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --quiet pytest
+      - run: python -m pytest -q
+
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The registry is the product catalogue. A broken build here means the
+      # website would have published something untrue.
+      - name: Registry must be publishable
+        run: python -c "from build.site import Registry; p=Registry.load().validate(); print('\n'.join(p)); raise SystemExit(1 if p else 0)"
+
+      - name: Generated site must be committed and current
+        run: |
+          python -m build.site
+          if ! git diff --quiet -- site; then
+            echo "::error::site/ is stale — run 'make build' and commit the result"
+            git --no-pager diff --stat -- site
+            exit 1
+          fi

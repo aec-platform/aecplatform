@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aecplatform.vn/schema/products.json",
+  "title": "AEC Platform product registry",
+  "description": "The single source of truth for what AEC Platform ships. The website, the org README and any deck are generated from this file — nothing about a product is written twice.",
+  "type": "object",
+  "required": ["org", "lines", "products"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "org": {
+      "type": "object",
+      "required": ["name", "domain", "github", "tagline", "thesis"],
+      "properties": {
+        "name": { "type": "string" },
+        "domain": { "type": "string" },
+        "github": { "type": "string" },
+        "founded": { "type": "string" },
+        "base": { "type": "string" },
+        "contact": { "type": "string", "format": "email" },
+        "tagline": { "$ref": "#/$defs/i18nString" },
+        "thesis": { "$ref": "#/$defs/i18nParagraphs" }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "blurb"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "name": { "$ref": "#/$defs/i18nString" },
+          "blurb": { "$ref": "#/$defs/i18nString" }
+        }
+      }
+    },
+    "products": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "slug", "name", "repo_dir", "line", "status", "license",
+          "language", "public", "repo", "tagline", "description", "highlights", "topics"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "description": "URL segment on aecplatform.vn/products/<slug>.html. Stable — changing it breaks links."
+          },
+          "name": { "type": "string" },
+          "repo_dir": {
+            "type": "string",
+            "description": "Directory name under ~/Documents/GitHub today. Used by the migration tooling; not shown on the site."
+          },
+          "line": { "type": "string", "description": "Must match a lines[].id." },
+          "status": { "enum": ["alpha", "beta", "stable", "private-beta", "research"] },
+          "license": { "type": "string" },
+          "language": { "type": "string" },
+          "public": { "type": "boolean", "description": "Is the source repository public right now." },
+          "repo": { "type": "string", "format": "uri" },
+          "package": {
+            "type": "object",
+            "required": ["registry", "name", "published"],
+            "additionalProperties": false,
+            "description": "The distribution this product ships as. There is deliberately no hand-written install command: it is derived from `published` and `public`, so the site cannot advertise a `pip install` for something that is not on the index yet.",
+            "properties": {
+              "registry": { "enum": ["pypi", "npm"] },
+              "name": { "type": "string" },
+              "published": {
+                "type": "boolean",
+                "description": "Is this name live on the index right now. Verify with `make check-packages` before flipping it to true."
+              }
+            }
+          },
+          "command": { "type": "string", "description": "One representative invocation, shown on the product page." },
+          "tests": { "type": "integer", "minimum": 0, "description": "Collected test count. Verified, not estimated." },
+          "depends_on": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Slugs this product imports at runtime. Drawn as the arrows in the stack diagram, so it must reflect real imports — not an architectural intention."
+          },
+          "tagline": { "$ref": "#/$defs/i18nString" },
+          "description": { "$ref": "#/$defs/i18nString" },
+          "highlights": { "$ref": "#/$defs/i18nList" },
+          "topics": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "i18nString": {
+      "type": "object",
+      "required": ["en", "vi"],
+      "additionalProperties": false,
+      "properties": { "en": { "type": "string" }, "vi": { "type": "string" } }
+    },
+    "i18nList": {
+      "type": "object",
+      "required": ["en", "vi"],
+      "additionalProperties": false,
+      "properties": {
+        "en": { "type": "array", "items": { "type": "string" } },
+        "vi": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "i18nParagraphs": { "$ref": "#/$defs/i18nList" }
+  }
+}
