@@ -23,6 +23,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "nav_open": {"en": "Open source", "vi": "Mã nguồn mở"},
     "nav_thesis": {"en": "Why", "vi": "Vì sao"},
     "nav_contact": {"en": "Contact", "vi": "Liên hệ"},
+    "nav_app": {"en": "Sign in", "vi": "Đăng nhập"},
     "hero_cta_primary": {"en": "Browse the open tools", "vi": "Xem bộ công cụ mở"},
     "hero_cta_secondary": {"en": "Talk to us", "vi": "Liên hệ với chúng tôi"},
     "thesis_heading": {"en": "Why this exists", "vi": "Vì sao có dự án này"},

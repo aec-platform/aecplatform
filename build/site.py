@@ -300,6 +300,7 @@ def page(
       <span>{_e(org['name'])}</span>
     </a>
     <nav class="nav">{nav}</nav>
+    <a class="nav-app" href="https://app.{org['domain']}">{_e(t("nav_app", lang))}</a>
     <a class="lang" href="{alt_url}" hreflang="{alt}">{_e(i18n.LABEL[alt])}</a>
   </div>
 </header>
@@ -614,6 +615,14 @@ p{margin:0 0 1rem}
 .small{font-size:14px}
 .muted{color:var(--muted)}
 
+/* The only route from the marketing site into the product. It was missing
+   entirely: every nav item pointed at an anchor on this page, so a visitor had
+   to guess the app.* subdomain. Styled as a button rather than a fifth nav
+   link, because it is the one thing here that is not reading. */
+.nav-app{display:inline-flex;align-items:center;padding:.4rem .85rem;border:1px solid var(--line);
+  border-radius:8px;font-size:.9rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+.nav-app:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:640px){.nav-app{padding:.3rem .6rem;font-size:.85rem}}
 /* header */
 .top{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 88%,transparent);
   backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
